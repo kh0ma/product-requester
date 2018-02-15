@@ -1,0 +1,398 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "A simple studing project that serves through products.",
+    "version" : "0.0.1",
+    "title" : "Product requester",
+    "contact" : {
+      "email" : "khomenko.dp@gmail.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/kh0ma/product-requester/0.0.1",
+  "tags" : [ {
+    "name" : "product_categories_api",
+    "description" : "CRUD for Product Categories"
+  }, {
+    "name" : "products_api",
+    "description" : "CRUD for Products"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/product_categories" : {
+      "get" : {
+        "tags" : [ "product_categories_api" ],
+        "summary" : "Get all Product Categories",
+        "description" : "the server return all Product Categories.\n",
+        "operationId" : "getProductCategories",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Product Categories in array",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ProductCategory"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "product_categories_api" ],
+        "summary" : "Add new Product Category",
+        "description" : "Create and save given Product Category\n",
+        "operationId" : "saveProductCategory",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "product_category",
+          "description" : "Provide valid Product Category",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ProductCategory"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "the Product category was successfully created"
+          },
+          "400" : {
+            "description" : "the Product category was not valid"
+          }
+        }
+      }
+    },
+    "/product_categories/{category_id}" : {
+      "get" : {
+        "tags" : [ "product_categories_api" ],
+        "summary" : "Get the Product Category by the given id.",
+        "description" : "Return the product category by the given category id.\n",
+        "operationId" : "getProductCategory",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category_id",
+          "in" : "path",
+          "description" : "an id of product category",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Requested Product Category",
+            "schema" : {
+              "$ref" : "#/definitions/ProductCategory"
+            }
+          },
+          "404" : {
+            "description" : "not found any Product Category by this id"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "product_categories_api" ],
+        "summary" : "Update Product Category by id",
+        "description" : "Update the requested product category\n",
+        "operationId" : "updateProductCategory",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category_id",
+          "in" : "path",
+          "description" : "an id of product category",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "product_category",
+          "description" : "Provide valid Product Category",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ProductCategory"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Successfully updated"
+          },
+          "400" : {
+            "description" : "the Product category was not valid"
+          },
+          "404" : {
+            "description" : "not found any Product Category by this id"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "product_categories_api" ],
+        "summary" : "Delete Product Category by id",
+        "description" : "Delete the requested product category\n",
+        "operationId" : "deleteProductCategory",
+        "parameters" : [ {
+          "name" : "category_id",
+          "in" : "path",
+          "description" : "an id of product category",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Successfully deleted"
+          },
+          "404" : {
+            "description" : "not found any Product Category by this id"
+          }
+        }
+      }
+    },
+    "/product_categories/{category_id}/products" : {
+      "get" : {
+        "tags" : [ "products_api" ],
+        "summary" : "Get all Products by the requested Product Category",
+        "description" : "the server return all Products by the requestes Product Category.\n",
+        "operationId" : "getProducts",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category_id",
+          "in" : "path",
+          "description" : "an id of product category",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Products in array",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Product"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "products_api" ],
+        "summary" : "Add new Product",
+        "description" : "Create and save given Product\n",
+        "operationId" : "saveProduct",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category_id",
+          "in" : "path",
+          "description" : "an id of product category",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "product",
+          "description" : "Provide valid Product",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Product"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "the Product was successfully created"
+          },
+          "400" : {
+            "description" : "the Product was not valid"
+          },
+          "404" : {
+            "description" : "not found any Product Category by this id"
+          }
+        }
+      }
+    },
+    "/product_categories/{category_id}/products/{id}" : {
+      "get" : {
+        "tags" : [ "products_api" ],
+        "summary" : "Get the Product by the given id.",
+        "description" : "Return the product by the given id.\n",
+        "operationId" : "getProduct",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category_id",
+          "in" : "path",
+          "description" : "an id of product category",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "an id of product",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Requested Product",
+            "schema" : {
+              "$ref" : "#/definitions/Product"
+            }
+          },
+          "404" : {
+            "description" : "not found any Product or Product Category by this id's"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "products_api" ],
+        "summary" : "Update Product by id",
+        "description" : "Update the requested product\n",
+        "operationId" : "updateProduct",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category_id",
+          "in" : "path",
+          "description" : "an id of product category",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "an id of product",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "in" : "body",
+          "name" : "product",
+          "description" : "Provide valid Product",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Product"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Successfully updated"
+          },
+          "400" : {
+            "description" : "the Product was not valid"
+          },
+          "404" : {
+            "description" : "not found any Product or Product Category by this id's"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "products_api" ],
+        "summary" : "Delete Product by id",
+        "description" : "Delete the requested product\n",
+        "operationId" : "deleteProduct",
+        "parameters" : [ {
+          "name" : "category_id",
+          "in" : "path",
+          "description" : "an id of product category",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "an id of product",
+          "required" : true,
+          "type" : "number",
+          "minimum" : 1,
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Successfully deleted"
+          },
+          "404" : {
+            "description" : "not found any Product or Product Category by this id's"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Product" : {
+      "type" : "object",
+      "required" : [ "name", "price", "product_category_id" ],
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int64",
+          "example" : 19554785
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "Apple"
+        },
+        "price" : {
+          "type" : "number",
+          "format" : "bigdecimal",
+          "example" : 12.99
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "This is a very large red clinged apple"
+        },
+        "product_category_id" : {
+          "type" : "number",
+          "format" : "int64",
+          "example" : 12
+        }
+      },
+      "example" : {
+        "price" : 12.99,
+        "name" : "Apple",
+        "description" : "This is a very large red clinged apple",
+        "id" : 19554785,
+        "product_category_id" : 12
+      }
+    },
+    "ProductCategory" : {
+      "type" : "object",
+      "required" : [ "name" ],
+      "properties" : {
+        "id" : {
+          "type" : "number",
+          "format" : "int64",
+          "example" : 12
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "Fruits"
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "Products that you can eat and get vitamins"
+        }
+      },
+      "example" : {
+        "name" : "Fruits",
+        "description" : "Products that you can eat and get vitamins",
+        "id" : 12
+      }
+    }
+  }
+}
