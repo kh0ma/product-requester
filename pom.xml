@@ -7,7 +7,7 @@
     <groupId>com.kh0ma</groupId>
     <artifactId>product-requester</artifactId>
     <packaging>pom</packaging>
-    <version>${product-requester.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <url>https://github.com/kh0ma/product-requester</url>
     <inceptionYear>2018</inceptionYear>
@@ -28,7 +28,6 @@
     <properties>
         <dropwizard.version>1.2.4</dropwizard.version>
         <joda.version>2.9.9</joda.version>
-        <product-requester.version>0.0.1-SNAPSHOT</product-requester.version>
     </properties>
 
     <dependencies>
