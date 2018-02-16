@@ -1,0 +1,228 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="Oleksandr Khomenko" id="v-0.0.1_002_000001" runOnChange="true">
+        <insert tableName="product_categories">
+            <column name="id">1</column>
+            <column name="name">Fruits</column>
+            <column name="description">
+                Fruits are the means by which angiosperms disseminate seeds.
+                Edible fruits, in particular, have propagated with the movements of humans
+                and animals in a symbiotic relationship as a means for seed dispersal
+                and nutrition; in fact, humans and many animals have become dependent
+                on fruits as a source of food. Accordingly, fruits account for a substantial
+                fraction of the world's agricultural output, and some (such as the apple
+                and the pomegranate) have acquired extensive cultural and symbolic meanings.
+            </column>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="id">2</column>
+            <column name="name">Vegetables</column>
+            <column name="description">
+                In everyday usage, vegetables are certain parts of plants that are consumed
+                by humans as food as part of a savory meal. Originally, the traditional
+                term (still commonly used in biology) included the flowers, fruit, stems,
+                leaves, roots, tubers, bark, seeds, and all other plant matter, although
+                modern-day culinary usage of the term vegetable may exclude food derived
+                from plants such as fruits, nuts, and cereal grains, but include seeds such
+                as pulses; the term vegetable is somewhat arbitrary, and can be largely
+                defined through culinary and cultural tradition.
+            </column>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="id">3</column>
+            <column name="name">Spices</column>
+            <column name="description">
+                A spice is a seed, fruit, root, bark, or other plant substance primarily
+                used for flavoring, coloring or preserving food. Spices are distinguished
+                from herbs, which are the leaves, flowers, or stems of plants used for
+                flavoring or as a garnish. Many spices have antimicrobial properties.
+                This may explain why spices are more commonly used in warmer climates,
+                which have more infectious diseases, and why the use of spices is prominent
+                in meat, which is particularly susceptible to spoiling. Spices are
+                sometimes used in medicine, religious rituals, cosmetics or perfume
+                production, or as a vegetable.
+            </column>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="id">4</column>
+            <column name="name">Sausages</column>
+            <column name="description">
+                A sausage is a cylindrical meat product usually made from ground meat,
+                often pork, beef, or veal, along with salt, spices and other flavourings,
+                and breadcrumbs, encased by a skin. Typically, a sausage is formed
+                in a casing traditionally made from intestine, but sometimes from synthetic
+                materials. Sausages that are sold raw are cooked in many ways, including
+                pan-frying, broiling and barbecuing. Some sausages are cooked during
+                processing and the casing may then be removed.
+            </column>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Oleksandr Khomenko" id="v-0.0.1_002_000002" runOnChange="true">
+        <insert tableName="products">
+            <column name="name">Apple</column>
+            <column name="description">
+                An apple is a sweet, edible fruit produced by an apple tree (Malus pumila).
+                Apple trees are cultivated worldwide as a fruit tree, and is the most
+                widely grown species in the genus Malus. The tree originated in Central
+                Asia, where its wild ancestor, Malus sieversii, is still found today.
+                Apples have been grown for thousands of years in Asia and Europe, and
+                were brought to North America by European colonists. Apples have religious
+                and mythological significance in many cultures, including Norse, Greek
+                and European Christian traditions.
+            </column>
+            <column name="price">12.99</column>
+            <column name="product_category_id">1</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Orange</column>
+            <column name="description">
+                The orange is the fruit of the citrus species Citrus × sinensis in
+                the family Rutaceae. It is also called sweet orange, to distinguish
+                it from the related Citrus × aurantium, referred to as bitter orange.
+                The sweet orange reproduces asexually (apomixis through nucellar embryony);
+                varieties of sweet orange arise through mutations.
+            </column>
+            <column name="price">10.87</column>
+            <column name="product_category_id">1</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Papaya</column>
+            <column name="description">
+                The papaya (from Carib via Spanish), papaw, or pawpaw is the plant Carica papaya,
+                one of the 22 accepted species in the genus Carica of the family Caricaceae.
+                Its origin is in the tropics of the Americas, perhaps from southern Mexico
+                and neighboring Central America.
+            </column>
+            <column name="price">39.78</column>
+            <column name="product_category_id">1</column>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name">Potato</column>
+            <column name="description">
+                The potato is a starchy, tuberous crop from the perennial nightshade
+                Solanum tuberosum. Potato may be applied to both the plant and the
+                edible tuber. Potato has become a staple food in many parts of
+                the world and an integral part of much of the world's food supply.
+                It is the world's fourth-largest food crop, following maize, wheat,
+                and rice. The green leaves and green skins of tubers exposed
+                to the light are toxic.
+            </column>
+            <column name="price">2.99</column>
+            <column name="product_category_id">2</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Onion</column>
+            <column name="description">
+                The onion (Allium cepa L., from Latin cepa "onion"), also known
+                as the bulb onion or common onion, is a vegetable that is
+                the most widely cultivated species of the genus Allium.
+                Its close relatives include the garlic, shallot, leek,
+                chive, and Chinese onion.
+            </column>
+            <column name="price">1.59</column>
+            <column name="product_category_id">2</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Cucumber</column>
+            <column name="description">
+                Cucumber (Cucumis sativus) is a widely cultivated plant
+                in the gourd family, Cucurbitaceae. It is a creeping
+                vine that bears cucumiform fruits that are used
+                as vegetables. There are three main varieties of
+                cucumber: slicing, pickling, and seedless.
+                Within these varieties, several cultivars have
+                been created. In North America, the term "wild cucumber"
+                refers to plants in the genera Echinocystis and Marah,
+                but these are not closely related. The cucumber is originally
+                from South Asia, but now grows on most continents. Many different
+                types of cucumber are traded on the global market.
+            </column>
+            <column name="price">2.19</column>
+            <column name="product_category_id">2</column>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name">Cinnamon</column>
+            <column name="description">
+                Cinnamon (/ˈsɪnəmən/ SIN-ə-mən) is a spice obtained from the inner
+                bark of several tree species from the genus Cinnamomum. Cinnamon
+                is used mainly as an aromatic condiment and flavoring additive
+                in a wide variety of cuisines, sweet and savoury dishes, breakfast
+                cereals, snackfoods, and traditional foods. The aroma and flavor
+                of cinnamon derive from its essential oil and principal component,
+                cinnamaldehyde, as well as numerous other constituents, including eugenol.
+            </column>
+            <column name="price">29.32</column>
+            <column name="product_category_id">3</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Basil</column>
+            <column name="description">
+                Basil UK: /ˈbæzəl/; US: /ˈbeɪzəl/ (Ocimum basilicum),
+                also called great basil or Saint-Joseph's-wort, is a culinary
+                herb of the family Lamiaceae (mints). The name "basil" comes
+                from Latin, Basilius, and Greek βασιλικόν φυτόν (basilikón phutón),
+                "royal/kingly plant".
+            </column>
+            <column name="price">39.99</column>
+            <column name="product_category_id">3</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Oregano</column>
+            <column name="description">
+                Oregano (US: /ɔːˈrɛɡənoʊ/ or /əˈrɛɡənoʊ/; UK: /ˌɒrɪˈɡɑːnoʊ/;
+                Origanum vulgare) is a flowering plant in the mint family (Lamiaceae).
+                It is native to temperate Western and Southwestern Eurasia
+                and the Mediterranean region.
+            </column>
+            <column name="price">37.99</column>
+            <column name="product_category_id">3</column>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name">Salami</column>
+            <column name="description">
+                Salami is a type of cured sausage consisting of fermented and air-dried meat,
+                typically beef or pork. Historically, salami was popular among southern
+                and central European peasants because it stores at room temperature
+                for up to 40 days once cut, supplementing a potentially meager
+                or inconsistent supply of fresh meat. Countries and regions across
+                Europe make their own traditional varieties of salami.
+            </column>
+            <column name="price">129.78</column>
+            <column name="product_category_id">4</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Blood sausage</column>
+            <column name="description">
+                Blood sausages are sausages filled with blood that are cooked
+                or dried and mixed with a filler until they are thick enough
+                to solidify when cooled. Variants are found worldwide.
+                Pig, cattle, sheep, duck, and goat blood can be used, varying by country.
+            </column>
+            <column name="price">99.99</column>
+            <column name="product_category_id">4</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Liver sausage</column>
+            <column name="description">
+                The word liverwurst is an anglicization of German Leberwurst,
+                meaning "liver sausage". It is also known as liver sausage by some
+                English speakers. It is a sausage eaten in North America, in large
+                parts of Europe, including Austria, Bulgaria, Croatia,
+                the Czech Republic, Denmark, Finland, Germany, Hungary, the Netherlands,
+                Norway, Poland, Romania (especially in Transylvania), Russia, Serbia,
+                Slovakia, Slovenia, Sweden, Ukraine, United Kingdom, and
+                in South American countries such as Argentina.
+            </column>
+            <column name="price">78.48</column>
+            <column name="product_category_id">4</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
