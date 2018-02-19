@@ -1,6 +1,6 @@
 package com.kh0ma.product_requster_service.domain.dao;
 
-import com.kh0ma.product_requster_service.domain.dao.generic.jdbc.JdbcGenericDao;
+import com.kh0ma.product_requster_service.domain.dao.generic.JdbcGenericDao;
 import com.kh0ma.product_requster_service.domain.entity.Product;
 import org.springframework.stereotype.Repository;
 
