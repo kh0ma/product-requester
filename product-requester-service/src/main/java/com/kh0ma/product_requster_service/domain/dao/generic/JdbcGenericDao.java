@@ -1,13 +1,16 @@
-package com.kh0ma.product_requster_service.domain.dao.generic.jdbc;
+package com.kh0ma.product_requster_service.domain.dao.generic;
 
-import com.kh0ma.product_requster_service.domain.dao.generic.GenericDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
+import static com.google.common.collect.MoreCollectors.onlyElement;
+
+
 import javax.sql.DataSource;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Olexander Khomenko
@@ -46,7 +49,9 @@ public abstract class JdbcGenericDao<T, PK> implements GenericDao<T, PK> {
 
     @Override
     public <S extends T> S findOne(PK pk) {
-        return null;
+        List<T> query = jdbcTemplate.query(String.format("SELECT * FROM %s WHERE id=?", getTableName()), rowMapper, pk);
+
+        return (S) query.stream().collect(onlyElement());
     }
 
     @Override
