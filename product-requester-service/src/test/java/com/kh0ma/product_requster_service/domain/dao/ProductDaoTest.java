@@ -78,6 +78,6 @@ public class ProductDaoTest extends GenericDaoTest<Product,Long> {
 
     @Override
     public Product getObject(Long id) {
-        return getTestingData().get(getId().intValue());
+        return getTestingData().get(getId().intValue()-1);
     }
 }
