@@ -1,5 +1,6 @@
 package com.kh0ma.product_requster_service.domain.dao;
 
+import com.kh0ma.product_requster_service.domain.dao.generic.GenericDao;
 import com.kh0ma.product_requster_service.domain.entity.Product;
 import com.kh0ma.product_requster_service.domain.entity.ProductBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,13 @@ import java.util.Collection;
  * @author Olexander Khomenko
  */
 
-public class ProductDaoTest extends DaoTest<Product,Long> {
+public class ProductDaoTest extends GenericDaoTest<Product,Long> {
 
     @Autowired
     private ProductDao dao;
 
     @Override
-    public Dao<Product, Long> getDao() {
+    public GenericDao<Product, Long> getDao() {
         return dao;
     }
 

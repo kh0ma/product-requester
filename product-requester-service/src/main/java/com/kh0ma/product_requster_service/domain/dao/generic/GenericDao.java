@@ -1,4 +1,4 @@
-package com.kh0ma.product_requster_service.domain.dao;
+package com.kh0ma.product_requster_service.domain.dao.generic;
 
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 
 
-public interface Dao<T, PK> {
+public interface GenericDao<T, PK> {
 
     /**
      * Save object

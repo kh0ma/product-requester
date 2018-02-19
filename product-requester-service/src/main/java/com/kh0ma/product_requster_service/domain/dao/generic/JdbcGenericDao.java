@@ -1,9 +1,7 @@
-package com.kh0ma.product_requster_service.domain.dao.jdbc;
+package com.kh0ma.product_requster_service.domain.dao.generic.jdbc;
 
-import com.google.common.base.CaseFormat;
-import com.kh0ma.product_requster_service.domain.dao.Dao;
+import com.kh0ma.product_requster_service.domain.dao.generic.GenericDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.GenericTypeResolver;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -15,7 +13,7 @@ import java.util.Collection;
  * @author Olexander Khomenko
  */
 
-public abstract class JdbcDao<T, PK> implements Dao<T, PK> {
+public abstract class JdbcGenericDao<T, PK> implements GenericDao<T, PK> {
 
     private BeanPropertyRowMapper<T> rowMapper;
 
@@ -24,7 +22,7 @@ public abstract class JdbcDao<T, PK> implements Dao<T, PK> {
     private SimpleJdbcInsert jdbcInsert;
 
 
-    public JdbcDao() {
+    public JdbcGenericDao() {
     }
 
     protected abstract String getTableName();

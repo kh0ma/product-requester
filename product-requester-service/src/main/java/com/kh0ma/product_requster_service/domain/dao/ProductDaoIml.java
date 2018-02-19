@@ -1,6 +1,6 @@
 package com.kh0ma.product_requster_service.domain.dao;
 
-import com.kh0ma.product_requster_service.domain.dao.jdbc.JdbcDao;
+import com.kh0ma.product_requster_service.domain.dao.generic.jdbc.JdbcGenericDao;
 import com.kh0ma.product_requster_service.domain.entity.Product;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public class ProductDaoIml extends JdbcDao<Product, Long> implements ProductDao {
+public class ProductDaoIml extends JdbcGenericDao<Product, Long> implements ProductDao {
 
     private final String tableName = "products";
 
