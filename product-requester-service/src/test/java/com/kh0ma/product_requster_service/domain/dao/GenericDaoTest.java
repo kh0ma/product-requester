@@ -8,8 +8,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Olexander Khomenko
@@ -24,16 +26,22 @@ public abstract class GenericDaoTest<T,PK> {
 
     public abstract GenericDao<T,PK> getDao();
 
-    public abstract Collection<? extends T> getTestingData();
+    public abstract List<? extends T> getTestingData();
+
+    public abstract <ID extends PK> ID getId();
+
+    public abstract <S extends T, ID extends PK> S getObject(ID id);
 
     @Ignore
     @Test
     public void save() {
     }
 
-    @Ignore
     @Test
     public void findOne() {
+        T object = getDao().findOne(getId());
+
+        assertEquals(getObject(getId()),object);
     }
 
     @Ignore

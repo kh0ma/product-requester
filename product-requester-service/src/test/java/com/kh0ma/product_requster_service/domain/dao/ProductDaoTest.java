@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Olexander Khomenko
@@ -24,7 +24,7 @@ public class ProductDaoTest extends GenericDaoTest<Product,Long> {
     }
 
     @Override
-    public Collection<? extends Product> getTestingData() {
+    public List<? extends Product> getTestingData() {
         return Arrays.asList(
                 ProductBuilder.aProduct()
                         .withId(1L)
@@ -69,5 +69,15 @@ public class ProductDaoTest extends GenericDaoTest<Product,Long> {
                         .withProductCategoryId(2L)
                         .build()
         );
+    }
+
+    @Override
+    public Long getId() {
+        return 5L;
+    }
+
+    @Override
+    public Product getObject(Long id) {
+        return getTestingData().get(getId().intValue());
     }
 }
