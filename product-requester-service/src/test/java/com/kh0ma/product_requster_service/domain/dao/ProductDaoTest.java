@@ -1,5 +1,6 @@
 package com.kh0ma.product_requster_service.domain.dao;
 
+import com.google.common.collect.Lists;
 import com.kh0ma.product_requster_service.domain.dao.generic.GenericDao;
 import com.kh0ma.product_requster_service.domain.dao.generic.GenericDaoTest;
 import com.kh0ma.product_requster_service.domain.entity.Product;
@@ -7,7 +8,6 @@ import com.kh0ma.product_requster_service.domain.entity.ProductBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,7 +26,7 @@ public class ProductDaoTest extends GenericDaoTest<Product,Long> {
 
     @Override
     public List<? extends Product> getTestingData() {
-        return Arrays.asList(
+        return Lists.newArrayList(
                 ProductBuilder.aProduct()
                         .withId(1L)
                         .withName("Apple")
@@ -70,6 +70,13 @@ public class ProductDaoTest extends GenericDaoTest<Product,Long> {
                         .withProductCategoryId(2L)
                         .build()
         );
+    }
+
+    @Override
+    public List<? extends Product> getTestingDataWithDeleted() {
+        List<? extends Product> testingData = getTestingData();
+        testingData.remove(getId().intValue()-1);
+        return testingData;
     }
 
     @Override

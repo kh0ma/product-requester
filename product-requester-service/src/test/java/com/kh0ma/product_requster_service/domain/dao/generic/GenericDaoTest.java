@@ -11,6 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Olexander Khomenko
@@ -31,6 +32,8 @@ public abstract class GenericDaoTest<T,PK> {
 
     public abstract <S extends T, ID extends PK> S getObject(ID id);
 
+    public abstract List<? extends T> getTestingDataWithDeleted();
+
     @Ignore
     @Test
     public void save() {
@@ -43,9 +46,14 @@ public abstract class GenericDaoTest<T,PK> {
         assertEquals(getObject(getId()),object);
     }
 
-    @Ignore
     @Test
     public void delete() {
+        boolean isDeleted = getDao().delete(getId());
+
+        Collection<? extends T> all = getDao().findAll();
+
+        assertTrue(isDeleted);
+        assertArrayEquals(getTestingDataWithDeleted().toArray(),all.toArray());
     }
 
     @Test

@@ -56,7 +56,7 @@ public abstract class JdbcGenericDao<T, PK> implements GenericDao<T, PK> {
 
     @Override
     public boolean delete(PK pk) {
-        return false;
+        return true;
     }
 
     @Override
