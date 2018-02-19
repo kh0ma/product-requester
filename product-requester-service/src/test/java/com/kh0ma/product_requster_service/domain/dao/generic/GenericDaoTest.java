@@ -1,6 +1,5 @@
-package com.kh0ma.product_requster_service.domain.dao;
+package com.kh0ma.product_requster_service.domain.dao.generic;
 
-import com.kh0ma.product_requster_service.domain.dao.generic.GenericDao;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
