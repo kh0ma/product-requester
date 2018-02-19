@@ -1,6 +1,7 @@
 package com.kh0ma.product_requster_service.domain.entity;
 
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 
 import java.math.BigDecimal;
 
@@ -72,5 +73,22 @@ public class Product {
                 .add("description", description)
                 .add("productCategoryId", productCategoryId)
                 .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equal(getId(), product.getId()) &&
+                Objects.equal(getName(), product.getName()) &&
+                Objects.equal(getPrice(), product.getPrice()) &&
+                Objects.equal(getDescription(), product.getDescription()) &&
+                Objects.equal(getProductCategoryId(), product.getProductCategoryId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId(), getName(), getPrice(), getDescription(), getProductCategoryId());
     }
 }
