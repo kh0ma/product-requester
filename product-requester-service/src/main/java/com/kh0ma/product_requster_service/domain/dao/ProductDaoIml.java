@@ -9,24 +9,26 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public class ProductDaoIml extends JdbcGenericDao<Product, Long> implements ProductDao {
+public class ProductDaoIml
+        extends JdbcGenericDao<Product, Long>
+        implements ProductDao {
 
-    private final String tableName = "products";
+    private static final String TABLE_NAME = "products";
 
-    private final Class<Product> genericType = Product.class;
+    private static final Class<Product> GENERIC_TYPE = Product.class;
 
     @Override
     public String getTableName() {
-        return tableName;
+        return TABLE_NAME;
     }
 
     @Override
     public Class<Product> getGenericType() {
-        return genericType;
+        return GENERIC_TYPE;
     }
 
     @Override
-    protected Long fromNumberToPk(Number id) {
+    protected Long fromNumberToPk(final Number id) {
         return Long.valueOf(id.toString());
     }
 }

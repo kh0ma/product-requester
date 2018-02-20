@@ -23,7 +23,7 @@ public class ProductCategoryDaoImpl
     }
 
     @Override
-    protected Long fromNumberToPk(Number id) {
+    protected Long fromNumberToPk(final Number id) {
         return Long.valueOf(id.toString());
     }
 }

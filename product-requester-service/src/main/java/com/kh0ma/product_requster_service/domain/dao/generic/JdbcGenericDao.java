@@ -25,7 +25,9 @@ import static com.google.common.collect.MoreCollectors.onlyElement;
  * @author Olexander Khomenko
  */
 
-public abstract class JdbcGenericDao<T extends Identifier<PK>, PK extends Serializable> implements GenericDao<T, PK> {
+public abstract class JdbcGenericDao<T extends Identifier<PK>, PK
+        extends Serializable>
+        implements GenericDao<T, PK> {
 
     private BeanPropertyRowMapper<T> rowMapper;
 
@@ -40,15 +42,31 @@ public abstract class JdbcGenericDao<T extends Identifier<PK>, PK extends Serial
     public JdbcGenericDao() {
     }
 
+    /**
+     * Specify Db table name.
+     *
+     * @return table name
+     */
     protected abstract String getTableName();
 
+    /**
+     * Specify class of domain object.
+     *
+     * @return class of domain object
+     */
     protected abstract Class<T> getGenericType();
 
+    /**
+     * Convert Number to PK instance.
+     *
+     * @param id in Number class
+     * @return converted id into PK class
+     */
     protected abstract PK fromNumberToPk(Number id);
 
     @Autowired
-    public void init(final JdbcTemplate jdbcTemplate,
-                     final DataSource dataSource) {
+    public final void init(final JdbcTemplate jdbcTemplate,
+                           final DataSource dataSource) {
         this.jdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName(getTableName())
                 .usingGeneratedKeyColumns("id");
@@ -57,15 +75,17 @@ public abstract class JdbcGenericDao<T extends Identifier<PK>, PK extends Serial
     }
 
     @Override
-    public <S extends T> S save(S s) {
-        final BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(s);
+    public <S extends T> S save(final S s) {
+        final BeanPropertySqlParameterSource map =
+                new BeanPropertySqlParameterSource(s);
         if (s.getId() == null) {
             Number number = jdbcInsert.executeAndReturnKey(map);
             s.setId(fromNumberToPk(number));
             return s;
         } else {
             MapSqlParameterSource paramsMap = getParamsMap(s, map);
-            int updatedRows = namedParameterJdbcTemplate.update(getUpdateSql(paramsMap), paramsMap);
+            int updatedRows = namedParameterJdbcTemplate
+                    .update(getUpdateSql(paramsMap), paramsMap);
             if (updatedRows == 0) {
                 return null;
             }
@@ -74,45 +94,56 @@ public abstract class JdbcGenericDao<T extends Identifier<PK>, PK extends Serial
     }
 
     @Override
-    public <S extends T> S findOne(PK pk) {
-        List<T> query = jdbcTemplate.query(String.format("SELECT * FROM %s WHERE id=?", getTableName()), rowMapper, pk);
+    public <S extends T> S findOne(final PK pk) {
+        String query = String.format("SELECT * FROM %s WHERE id=?",
+                getTableName());
+        List<T> rows = jdbcTemplate.query(query, rowMapper, pk);
 
-        return (S) query.stream().collect(onlyElement());
+        return (S) rows.stream().collect(onlyElement());
     }
 
     @Override
-    public boolean delete(PK pk) {
-        return jdbcTemplate.update(String.format("DELETE FROM %s WHERE id=?", getTableName()), pk) != 0;
+    public boolean delete(final PK pk) {
+        String query = String.format("DELETE FROM %s WHERE id=?",
+                getTableName());
+        return jdbcTemplate.update(query, pk) != 0;
     }
 
     @Override
     public <S extends T> Collection<S> findAll() {
-        return (Collection<S>) jdbcTemplate.query(String.format("SELECT * FROM %s", getTableName()), rowMapper);
+        String query = String.format("SELECT * FROM %s", getTableName());
+        return (Collection<S>) jdbcTemplate.query(query, rowMapper);
     }
 
 
-    private String toLowerCase(String camelCase) {
+    private String toLowerCase(final String camelCase) {
         return CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, camelCase);
     }
 
-    private Object objectFromField(String field, BeanWrapperImpl beanWrapper) {
+    private Object objectFromField(final String field,
+                                   final BeanWrapperImpl beanWrapper) {
         return beanWrapper.getPropertyValue(field);
     }
 
-    private <S extends T> MapSqlParameterSource getParamsMap(final S entity, final BeanPropertySqlParameterSource map) {
+    private <S extends T> MapSqlParameterSource getParamsMap(
+            final S entity,
+            final BeanPropertySqlParameterSource map) {
         final MapSqlParameterSource params = new MapSqlParameterSource();
 
         final BeanWrapperImpl beanWrapper = new BeanWrapperImpl(entity);
 
-        ArrayList<String> fields = Lists.newArrayList(map.getReadablePropertyNames());
+        ArrayList<String> fields =
+                Lists.newArrayList(map.getReadablePropertyNames());
         fields.remove("class");
 
-        fields.forEach(field -> params.addValue(toLowerCase(field), objectFromField(field, beanWrapper)));
+        fields.forEach(field -> params
+                .addValue(toLowerCase(field),
+                        objectFromField(field, beanWrapper)));
 
         return params;
     }
 
-    private String getUpdateSql(MapSqlParameterSource params) {
+    private String getUpdateSql(final MapSqlParameterSource params) {
         Set<String> fields = params.getValues().keySet();
         String collectedFields = fields.stream()
                 .filter(field -> !field.equalsIgnoreCase("id"))

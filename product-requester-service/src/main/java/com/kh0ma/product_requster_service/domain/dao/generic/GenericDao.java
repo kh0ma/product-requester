@@ -15,15 +15,15 @@ import java.util.Collection;
 public interface GenericDao<T extends Identifier<PK>, PK extends Serializable> {
 
     /**
-     * Save object
+     * Save object.
      *
-     * @param <S> is object or its child
+     * @param s is object or its child
      * @return an object contains primary key
      */
     <S extends T> S save(S s);
 
     /**
-     * Find one object by primary key
+     * Find one object by primary key.
      *
      * @param pk  searched primary key
      * @param <S> is object or its child
@@ -32,7 +32,7 @@ public interface GenericDao<T extends Identifier<PK>, PK extends Serializable> {
     <S extends T> S findOne(PK pk);
 
     /**
-     * Delete object by primary key
+     * Delete object by primary key.
      *
      * @param pk searched primary key
      * @return true if delete is successful
@@ -40,7 +40,7 @@ public interface GenericDao<T extends Identifier<PK>, PK extends Serializable> {
     boolean delete(PK pk);
 
     /**
-     * Find all objects
+     * Find all objects.
      *
      * @param <S> is object or its child
      * @return collection of objects
