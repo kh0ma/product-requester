@@ -80,6 +80,16 @@ public class ProductDaoTest extends GenericDaoTest<Product,Long> {
     }
 
     @Override
+    public Product getCreatedObject() {
+        return ProductBuilder.aProduct()
+                .withName("New Product")
+                .withDescription("New Product Description")
+                .withPrice(BigDecimal.valueOf(1221212.22))
+                .withProductCategoryId(2L)
+                .build();
+    }
+
+    @Override
     public Product getUpdatedObject(Product updatingObject) {
         updatingObject.setName(updatingObject.getName() + " UPDATED");
         updatingObject.setDescription(updatingObject.getDescription() + " UPDATED");

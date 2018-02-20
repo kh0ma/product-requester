@@ -5,7 +5,6 @@ import liquibase.exception.LiquibaseException;
 import liquibase.integration.spring.SpringLiquibase;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +44,16 @@ public abstract class GenericDaoTest<T extends Identifier<PK>, PK extends Serial
 
     public abstract <S extends T, ID extends PK> S getUpdatedObject(S updatingObject);
 
-    @Ignore
+    public abstract <S extends T, ID extends PK> S getCreatedObject();
+
     @Test
     public void save() {
+        T createdObject = getCreatedObject();
+        T savingObject = getDao().save(createdObject);
+        T savedObject = getDao().findOne(savingObject.getId());
+        createdObject.setId(savingObject.getId());
 
+        assertEquals(createdObject,savedObject);
     }
 
     @Test
