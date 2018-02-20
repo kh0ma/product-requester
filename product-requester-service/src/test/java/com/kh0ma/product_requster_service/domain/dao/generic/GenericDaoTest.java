@@ -1,17 +1,23 @@
 package com.kh0ma.product_requster_service.domain.dao.generic;
 
+import liquibase.Liquibase;
+import liquibase.exception.LiquibaseException;
+import liquibase.integration.spring.SpringLiquibase;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.lang.reflect.Method;
+import java.sql.Connection;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author Olexander Khomenko
@@ -23,6 +29,8 @@ import static org.junit.Assert.assertTrue;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 public abstract class GenericDaoTest<T,PK> {
+
+    private Liquibase liquibase;
 
     public abstract GenericDao<T,PK> getDao();
 
@@ -61,5 +69,25 @@ public abstract class GenericDaoTest<T,PK> {
         Collection<? extends T> all = getDao().findAll();
 
         assertArrayEquals(getTestingData().toArray(),all.toArray());
+    }
+
+    @Autowired
+    public void prepareLiquibase(SpringLiquibase springLiquibase) throws Exception {
+        Method createLiquibase = springLiquibase
+                .getClass()
+                .getDeclaredMethod("createLiquibase", Connection.class);
+        createLiquibase.setAccessible(true);
+        liquibase = (Liquibase) createLiquibase
+                .invoke(springLiquibase, springLiquibase.getDataSource().getConnection());
+    }
+
+    @Before
+    public void updateDb() throws LiquibaseException {
+        liquibase.update("test");
+    }
+
+    @After
+    public void dropDb() throws LiquibaseException {
+        liquibase.dropAll();
     }
 }
