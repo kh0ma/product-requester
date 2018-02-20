@@ -42,9 +42,23 @@ public abstract class GenericDaoTest<T,PK> {
 
     public abstract List<? extends T> getTestingDataWithDeleted();
 
+    public abstract <S extends T, ID extends PK> S getUpdatedObject(S updatingObject);
+
     @Ignore
     @Test
     public void save() {
+
+    }
+
+    @Test
+    public void update() {
+        T updatingObject = getDao().findOne(getId());
+        T updatedObject = getUpdatedObject(updatingObject);
+        T savingObject = getDao().save(updatedObject);
+        T savedObject = getDao().findOne(getId());
+
+        assertEquals(updatedObject,savingObject);
+        assertEquals(updatedObject,savedObject);
     }
 
     @Test
