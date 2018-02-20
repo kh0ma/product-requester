@@ -1,5 +1,6 @@
 package com.kh0ma.product_requster_service.domain.dao.generic;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Collection;
  */
 
 
-public interface GenericDao<T, PK> {
+public interface GenericDao<T extends Identifier<PK>, PK extends Serializable> {
 
     /**
      * Save object

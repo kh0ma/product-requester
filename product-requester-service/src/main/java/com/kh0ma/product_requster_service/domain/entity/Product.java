@@ -2,6 +2,7 @@ package com.kh0ma.product_requster_service.domain.entity;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import com.kh0ma.product_requster_service.domain.dao.generic.Identifier;
 
 import java.math.BigDecimal;
 
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
  * @author Olexander Khomenko
  */
 
-public class Product {
+public class Product implements Identifier<Long> {
 
     private Long id;
 

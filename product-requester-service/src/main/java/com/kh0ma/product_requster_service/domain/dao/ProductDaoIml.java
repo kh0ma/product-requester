@@ -24,4 +24,9 @@ public class ProductDaoIml extends JdbcGenericDao<Product, Long> implements Prod
     public Class<Product> getGenericType() {
         return genericType;
     }
+
+    @Override
+    protected Long fromNumberToPk(Number id) {
+        return Long.valueOf(id.toString());
+    }
 }

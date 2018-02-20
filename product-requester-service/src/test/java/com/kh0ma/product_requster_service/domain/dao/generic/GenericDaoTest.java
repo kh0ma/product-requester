@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.util.Collection;
@@ -28,7 +29,7 @@ import static org.junit.Assert.*;
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-public abstract class GenericDaoTest<T,PK> {
+public abstract class GenericDaoTest<T extends Identifier<PK>, PK extends Serializable> {
 
     private Liquibase liquibase;
 
