@@ -92,22 +92,25 @@ public abstract class GenericDaoTest<T extends Identifier<PK>, PK extends Serial
     }
 
     @Autowired
-    public void prepareLiquibase(SpringLiquibase springLiquibase) throws Exception {
+    public final void prepareLiquibase(final SpringLiquibase springLiquibase) throws Exception {
         Method createLiquibase = springLiquibase
                 .getClass()
                 .getDeclaredMethod("createLiquibase", Connection.class);
         createLiquibase.setAccessible(true);
         liquibase = (Liquibase) createLiquibase
-                .invoke(springLiquibase, springLiquibase.getDataSource().getConnection());
+                .invoke(springLiquibase,
+                        springLiquibase
+                                .getDataSource()
+                                .getConnection());
     }
 
     @Before
-    public void updateDb() throws LiquibaseException {
+    public final void updateDb() throws LiquibaseException {
         liquibase.update("test");
     }
 
     @After
-    public void dropDb() throws LiquibaseException {
+    public final void dropDb() throws LiquibaseException {
         liquibase.dropAll();
     }
 }
