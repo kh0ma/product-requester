@@ -32,7 +32,7 @@ public abstract class GenericDaoTest<T extends Identifier<PK>, PK extends Serial
 
     private Liquibase liquibase;
 
-    public abstract GenericDao<T,PK> getDao();
+    public abstract GenericDao<T, PK> getDao();
 
     public abstract List<? extends T> getTestingData();
 
@@ -53,7 +53,7 @@ public abstract class GenericDaoTest<T extends Identifier<PK>, PK extends Serial
         T savedObject = getDao().findOne(savingObject.getId());
         createdObject.setId(savingObject.getId());
 
-        assertEquals(createdObject,savedObject);
+        assertEquals(createdObject, savedObject);
     }
 
     @Test
@@ -63,15 +63,15 @@ public abstract class GenericDaoTest<T extends Identifier<PK>, PK extends Serial
         T savingObject = getDao().save(updatedObject);
         T savedObject = getDao().findOne(getId());
 
-        assertEquals(updatedObject,savingObject);
-        assertEquals(updatedObject,savedObject);
+        assertEquals(updatedObject, savingObject);
+        assertEquals(updatedObject, savedObject);
     }
 
     @Test
     public void findOne() {
         T object = getDao().findOne(getId());
 
-        assertEquals(getObject(getId()),object);
+        assertEquals(getObject(getId()), object);
     }
 
     @Test
@@ -81,14 +81,14 @@ public abstract class GenericDaoTest<T extends Identifier<PK>, PK extends Serial
         Collection<? extends T> all = getDao().findAll();
 
         assertTrue(isDeleted);
-        assertArrayEquals(getTestingDataWithDeleted().toArray(),all.toArray());
+        assertArrayEquals(getTestingDataWithDeleted().toArray(), all.toArray());
     }
 
     @Test
     public void findAll() {
         Collection<? extends T> all = getDao().findAll();
 
-        assertArrayEquals(getTestingData().toArray(),all.toArray());
+        assertArrayEquals(getTestingData().toArray(), all.toArray());
     }
 
     @Autowired

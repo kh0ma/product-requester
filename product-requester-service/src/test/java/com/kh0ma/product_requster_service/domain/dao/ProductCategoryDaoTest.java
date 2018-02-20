@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Olexander Khomenko
  */
-public class ProductCategoryDaoTest extends GenericDaoTest<ProductCategory,Long> {
+public class ProductCategoryDaoTest extends GenericDaoTest<ProductCategory, Long> {
 
     @Autowired
     private ProductCategoryDao dao;
@@ -44,13 +44,13 @@ public class ProductCategoryDaoTest extends GenericDaoTest<ProductCategory,Long>
 
     @Override
     public ProductCategory getObject(Long id) {
-        return getTestingData().get(getId().intValue()-1);
+        return getTestingData().get(getId().intValue() - 1);
     }
 
     @Override
     public List<? extends ProductCategory> getTestingDataWithDeleted() {
         List<? extends ProductCategory> testingData = getTestingData();
-        testingData.remove(getId().intValue()-1);
+        testingData.remove(getId().intValue() - 1);
         return testingData;
     }
 

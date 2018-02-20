@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * @author Olexander Khomenko
- *
- * Main interface of DAO
- *
- * @param <T> type of object
+ * @param <T>  type of object
  * @param <PK> type of primary key
+ * @author Olexander Khomenko
+ * <p>
+ * Main interface of DAO
  */
 
 
@@ -26,7 +25,7 @@ public interface GenericDao<T extends Identifier<PK>, PK extends Serializable> {
     /**
      * Find one object by primary key
      *
-     * @param pk searched primary key
+     * @param pk  searched primary key
      * @param <S> is object or its child
      * @return an object contains primary key
      */

@@ -66,7 +66,7 @@ public abstract class JdbcGenericDao<T extends Identifier<PK>, PK extends Serial
         } else {
             MapSqlParameterSource paramsMap = getParamsMap(s, map);
             int updatedRows = namedParameterJdbcTemplate.update(getUpdateSql(paramsMap), paramsMap);
-            if(updatedRows == 0) {
+            if (updatedRows == 0) {
                 return null;
             }
         }
@@ -107,7 +107,7 @@ public abstract class JdbcGenericDao<T extends Identifier<PK>, PK extends Serial
         ArrayList<String> fields = Lists.newArrayList(map.getReadablePropertyNames());
         fields.remove("class");
 
-        fields.forEach(field -> params.addValue(toLowerCase(field),objectFromField(field,beanWrapper)));
+        fields.forEach(field -> params.addValue(toLowerCase(field), objectFromField(field, beanWrapper)));
 
         return params;
     }

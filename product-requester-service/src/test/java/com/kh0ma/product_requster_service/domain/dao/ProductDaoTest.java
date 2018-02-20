@@ -14,7 +14,7 @@ import java.util.List;
  * @author Olexander Khomenko
  */
 
-public class ProductDaoTest extends GenericDaoTest<Product,Long> {
+public class ProductDaoTest extends GenericDaoTest<Product, Long> {
 
     @Autowired
     private ProductDao dao;
@@ -75,7 +75,7 @@ public class ProductDaoTest extends GenericDaoTest<Product,Long> {
     @Override
     public List<? extends Product> getTestingDataWithDeleted() {
         List<? extends Product> testingData = getTestingData();
-        testingData.remove(getId().intValue()-1);
+        testingData.remove(getId().intValue() - 1);
         return testingData;
     }
 
@@ -104,6 +104,6 @@ public class ProductDaoTest extends GenericDaoTest<Product,Long> {
 
     @Override
     public Product getObject(Long id) {
-        return getTestingData().get(getId().intValue()-1);
+        return getTestingData().get(getId().intValue() - 1);
     }
 }
