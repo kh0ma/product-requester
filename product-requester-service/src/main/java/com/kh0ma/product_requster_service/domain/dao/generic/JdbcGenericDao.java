@@ -56,7 +56,7 @@ public abstract class JdbcGenericDao<T, PK> implements GenericDao<T, PK> {
 
     @Override
     public boolean delete(PK pk) {
-        return true;
+        return jdbcTemplate.update(String.format("DELETE FROM %s WHERE id=?", getTableName()), pk) != 0;
     }
 
     @Override
