@@ -6,5 +6,8 @@
 
     <include file="changelog_v-0.0.1_001-init_schema.xml" relativeToChangelogFile="true"/>
     <include file="changelog_v-0.0.1_002-seed_data.xml" relativeToChangelogFile="true"/>
-    <include file="changelog_v-0.0.1_003-change_product_and_pcategory_name_constraits.xml" relativeToChangelogFile="true"/>
+    <include file="changelog_v-0.0.1_003-change_product_and_pcategory_name_constraits.xml"
+             relativeToChangelogFile="true"/>
+    <include file="changelog_v-0.0.1_004-change_product_category_id_constraint_on_delete_restrict.xml"
+             relativeToChangelogFile="true"/>
 </databaseChangeLog>
