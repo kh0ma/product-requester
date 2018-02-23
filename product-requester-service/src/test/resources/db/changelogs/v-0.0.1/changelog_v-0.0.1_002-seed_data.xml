@@ -1,0 +1,59 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="Oleksandr Khomenko" id="v-0.0.1_002_000001" runOnChange="true" context="test">
+        <insert tableName="product_categories">
+            <column name="id">1</column>
+            <column name="name">Fruits</column>
+            <column name="description">Some Test Description</column>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="id">2</column>
+            <column name="name">Vegetables</column>
+            <column name="description">Some Test Description</column>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Oleksandr Khomenko" id="v-0.0.1_002_000002" runOnChange="true">
+        <insert tableName="products">
+            <column name="name">Apple</column>
+            <column name="description">Some Test Description</column>
+            <column name="price">12.99</column>
+            <column name="product_category_id">1</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Orange</column>
+            <column name="description">Some Test Description</column>
+            <column name="price">10.87</column>
+            <column name="product_category_id">1</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Papaya</column>
+            <column name="description">Some Test Description</column>
+            <column name="price">39.78</column>
+            <column name="product_category_id">1</column>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name">Potato</column>
+            <column name="description">Some Test Description</column>
+            <column name="price">2.99</column>
+            <column name="product_category_id">2</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Onion</column>
+            <column name="description">Some Test Description</column>
+            <column name="price">1.59</column>
+            <column name="product_category_id">2</column>
+        </insert>
+        <insert tableName="products">
+            <column name="name">Cucumber</column>
+            <column name="description">Some Test Description</column>
+            <column name="price">2.19</column>
+            <column name="product_category_id">2</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
