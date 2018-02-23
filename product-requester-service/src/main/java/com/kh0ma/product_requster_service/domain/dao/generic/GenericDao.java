@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
+ * Main interface of DAO.
+ *
  * @param <T>  type of object
  * @param <PK> type of primary key
  * @author Olexander Khomenko
  * <p>
- * Main interface of DAO
  */
 
 
