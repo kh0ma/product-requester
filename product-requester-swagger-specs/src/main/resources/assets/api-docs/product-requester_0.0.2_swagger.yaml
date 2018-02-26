@@ -1,7 +1,7 @@
 ---
 swagger: "2.0"
 info:
-  description: "A simple studing project that serves through products."
+  description: "A simple studding project that serves through products."
   version: "0.0.2"
   title: "Product requester"
   contact:
