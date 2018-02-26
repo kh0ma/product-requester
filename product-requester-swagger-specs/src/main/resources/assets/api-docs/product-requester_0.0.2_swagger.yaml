@@ -10,7 +10,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "virtserver.swaggerhub.com"
-basePath: "/kh0ma/product-requester/0.0.1"
+basePath: "/kh0ma/product-requester/0.0.2"
 tags:
 - name: "product_categories_api"
   description: "CRUD for Product Categories"
@@ -27,6 +27,117 @@ tags:
 schemes:
 - "https"
 paths:
+  /bill_cycle_runs:
+    get:
+      tags:
+      - bill_cycle_run_api
+      summary: "Get all Bill Cycle Runs"
+      description: "the server return all Bill Cycle Runs.\n"
+      operationId: "getBillCycleRuns"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Bill Cycle Runs in array"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/BillCycleRun"
+    post:
+      tags:
+      - bill_cycle_run_api
+      summary: "Add new Bill Cycle Run"
+      description: "Create and save given Bill Cycle Run\n"
+      operationId: "saveBillCycleRun"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "bill_cycle_run"
+        description: "Provide valid Bill Cycle Run"
+        required: true
+        schema:
+          $ref: "#/definitions/BillCycleRun"
+      responses:
+        201:
+          description: "the Bill Cycle Run was successfully created"
+        400:
+          description: "the Bill Cycle Run was not valid"
+  /bill_cycle_runs/{bill_cycle_run_id}:
+    get:
+      tags:
+      - bill_cycle_run_api
+      summary: "Get the Bill Cycle Run by the given id."
+      description: "Return the bill cycle run by the given id.\n"
+      operationId: "getBillCycleRun"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bill_cycle_run_id"
+        in: "path"
+        description: "an id of bill cycle run"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      responses:
+        200:
+          description: "Requested Bill Cycle Run"
+          schema:
+            $ref: "#/definitions/BillCycleRun"
+        404:
+          description: "not found any Bill Cycle Run by this id"
+    put:
+      tags:
+      - bill_cycle_run_api
+      summary: "Update Bill Cycle Run by id"
+      description: "Update the requested bill cycle run\n"
+      operationId: "updateBillCycleRun"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "bill_cycle_run_id"
+        in: "path"
+        description: "an id of bill cycle run"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      - in: "body"
+        name: "bill_cycle_run"
+        description: "Provide valid Bill Cycle Run"
+        required: true
+        schema:
+          $ref: "#/definitions/BillCycleRun"
+      responses:
+        204:
+          description: "Successfully updated"
+        400:
+          description: "the bill cycle run was not valid"
+        404:
+          description: "not found any bill cycle runs by this id"
+    delete:
+      tags:
+      - bill_cycle_run_api
+      summary: "Delete Bill Cycle Run by id"
+      description: "Delete the requested bill cycle run\n"
+      operationId: "deleteBillCycleRun"
+      parameters:
+      - name: "bill_cycle_run_id"
+        in: "path"
+        description: "an id of bill cycle run"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      responses:
+        204:
+          description: "Successfully deleted"
+        404:
+          description: "not found any Bill Cycle Run by this id"
   /bill_cycles:
     get:
       tags:
@@ -527,7 +638,7 @@ definitions:
         example: 12
       status:
         type: string
-        enum: &BILL_CYCLE_RUN_STATUSES [CREATED, ERROR, COMPLITED]
+        enum: &BILL_CYCLE_RUN_STATUSES [CREATED, ERROR, COMPLETED]
       start_date:
         type: string
         format: date
