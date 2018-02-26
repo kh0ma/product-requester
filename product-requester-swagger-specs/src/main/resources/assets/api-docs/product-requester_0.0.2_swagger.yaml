@@ -27,6 +27,117 @@ tags:
 schemes:
 - "https"
 paths:
+  /invoice:
+    get:
+      tags:
+      - invoice_api
+      summary: "Get all Invoices"
+      description: "the server return all Invoices.\n"
+      operationId: "getInvoices"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Invoices in array"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Invoice"
+    post:
+      tags:
+      - invoice_api
+      summary: "Add new Invoice"
+      description: "Create and save given Invoice\n"
+      operationId: "saveInvoice"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "invoice"
+        description: "Provide valid Invoice"
+        required: true
+        schema:
+          $ref: "#/definitions/Invoice"
+      responses:
+        201:
+          description: "the Invoice was successfully created"
+        400:
+          description: "the Invoice was not valid"
+  /invoice/{invoice_id}:
+    get:
+      tags:
+      - invoice_api
+      summary: "Get the Invoice by the given id."
+      description: "Return the Invoice by the given id.\n"
+      operationId: "getInvoice"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "invoice_id"
+        in: "path"
+        description: "an id of Invoice"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      responses:
+        200:
+          description: "Requested Invoice"
+          schema:
+            $ref: "#/definitions/Invoice"
+        404:
+          description: "not found any Invoices by this id"
+    put:
+      tags:
+      - invoice_api
+      summary: "Update Invoice by id"
+      description: "Update the requested Invoice\n"
+      operationId: "updateInvoice"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "invoice_id"
+        in: "path"
+        description: "an id of Invoice"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      - in: "body"
+        name: "invoice_id"
+        description: "Provide valid Invoice"
+        required: true
+        schema:
+          $ref: "#/definitions/Invoice"
+      responses:
+        204:
+          description: "Successfully updated"
+        400:
+          description: "the Invoice was not valid"
+        404:
+          description: "not found any Invoice by this id"
+    delete:
+      tags:
+      - invoice_api
+      summary: "Delete Invoice by id"
+      description: "Delete the requested Invoice\n"
+      operationId: "deleteInvoicen"
+      parameters:
+      - name: "invoice_id"
+        in: "path"
+        description: "an id of Invoice"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      responses:
+        204:
+          description: "Successfully deleted"
+        404:
+          description: "not found any Invoices by this id"
   /subscriptions:
     get:
       tags:
