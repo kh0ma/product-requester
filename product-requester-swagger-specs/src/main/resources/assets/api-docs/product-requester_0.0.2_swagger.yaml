@@ -26,6 +26,155 @@ tags:
   description: "CRUD for Invoice"
 schemes:
 - "https"
+definitions:
+  Product:
+    type: "object"
+    required:
+    - "name"
+    - "price"
+    - "product_category_id"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+        example: 19554785
+      name:
+        type: "string"
+        example: "Apple"
+      price:
+        type: "number"
+        format: "bigdecimal"
+        example: 12.99
+      description:
+        type: "string"
+        example: "This is a very large red clinged apple"
+      product_category_id:
+        type: "number"
+        format: "int64"
+        example: 12
+    example:
+      price: 12.99
+      name: "Apple"
+      description: "This is a very large red clinged apple"
+      id: 19554785
+      product_category_id: 12
+  ProductCategory:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+        example: 12
+      name:
+        type: "string"
+        example: "Fruits"
+      description:
+        type: "string"
+        example: "Products that you can eat and get vitamins"
+    example:
+      name: "Fruits"
+      description: "Products that you can eat and get vitamins"
+      id: 12
+  Invoice:
+    type: object
+    required:
+    - balance
+    - subscription_id
+    - bill_cycle_run_id
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+        example: 12
+      balance:
+        type: number
+        format: "bigdecimal"
+        example: 12.99
+      subscription_id:
+        type: "number"
+        format: "int64"
+        example: 12
+      bill_cycle_run_id:
+        type: "number"
+        format: "int64"
+        example: 12
+  Subscription:
+    type: object
+    required:
+    - status
+    - valid_from
+    - valid_to
+    - product_id
+    - bill_cycle_id
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+        example: 12
+      status:
+        type: string
+        enum: &SUBSCRIPTION_STATUSES [DRAFT, ACTIVE, EXPIRED]
+      valid_from:
+        type: string
+        format: date
+      valid_to:
+        type: string
+        format: date
+      product_id:
+        type: "number"
+        format: "int64"
+        example: 12
+      bill_cycle_id:
+        type: "number"
+        format: "int64"
+        example: 12
+  BillCycle:
+    type: object
+    required:
+    - status
+    - valid_from
+    - valid_to
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+        example: 12
+      status:
+        type: string
+        enum: &BILL_CYCLE_STATUSES [DRAFT, ACTIVE, COMPLITED]
+      valid_from:
+        type: string
+        format: date
+      valid_to:
+        type: string
+        format: date
+  BillCycleRun:
+    type: object
+    required:
+    - status
+    - start_date
+    - end_date
+    - bill_cycle_id
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+        example: 13
+      status:
+        type: string
+        enum: &BILL_CYCLE_RUN_STATUSES [CREATED, ERROR, COMPLETED]
+      start_date:
+        type: string
+        format: date
+      end_date:
+        type: string
+        format: date
+      bill_cycle_id:
+        type: "number"
+        format: "int64"
+        example: 144
 paths:
   /invoice:
     get:
@@ -36,7 +185,27 @@ paths:
       operationId: "getInvoices"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - in: query
+        name: balance_from
+        type: number
+        format: bigdecimal
+        minimum: 0
+      - in: query
+        name: balance_to
+        type: number
+        format: bigdecimal
+        minimum: 0
+      - in: query
+        name: subscription_id
+        type: number
+        format: int64
+        minimum: 1
+      - in: query
+        name: bill_cycle_run_id
+        type: number
+        format: int64
+        minimum: 1
       responses:
         200:
           description: "Invoices in array"
@@ -147,7 +316,29 @@ paths:
       operationId: "getSubscriptions"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - in: query
+        name: status
+        type: string
+        enum: *SUBSCRIPTION_STATUSES
+      - in: query
+        name: valid_from
+        type: string
+        format: date
+      - in: query
+        name: valid_to
+        type: string
+        format: date
+      - in: query
+        name: product_id
+        type: number
+        format: int64
+        minimum: 1
+      - in: query
+        name: bill_cycle_id
+        type: number
+        format: int64
+        minimum: 1
       responses:
         200:
           description: "Subscriptions in array"
@@ -258,7 +449,24 @@ paths:
       operationId: "getBillCycleRuns"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - in: query
+        name: status
+        type: string
+        enum: *BILL_CYCLE_RUN_STATUSES
+      - in: query
+        name: start_date
+        type: string
+        format: date
+      - in: query
+        name: end_date
+        type: string
+        format: date
+      - in: query
+        name: bill_cycle_id
+        type: number
+        format: int64
+        minimum: 1
       responses:
         200:
           description: "Bill Cycle Runs in array"
@@ -369,7 +577,19 @@ paths:
       operationId: "getBillCycles"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - in: query
+        name: status
+        type: string
+        enum: *BILL_CYCLE_STATUSES
+      - in: query
+        name: valid_from
+        type: string
+        format: date
+      - in: query
+        name: valid_to
+        type: string
+        format: date
       responses:
         200:
           description: "Bill Cycles in array"
@@ -480,7 +700,13 @@ paths:
       operationId: "getProductCategories"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - in: query
+        name: name
+        type: string
+      - in: query
+        name: description
+        type: string
       responses:
         200:
           description: "Product Categories in array"
@@ -592,6 +818,22 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: query
+        name: name
+        type: string
+      - in: query
+        name: price_from
+        type: number
+        format: bigdecimal
+        minimum: 0
+      - in: query
+        name: price_to
+        type: number
+        format: bigdecimal
+        minimum: 0
+      - in: query
+        name: description
+        type: string
       - name: "category_id"
         in: "path"
         description: "an id of product category"
@@ -730,152 +972,3 @@ paths:
           description: "Successfully deleted"
         404:
           description: "not found any Product or Product Category by this id's"
-definitions:
-  Product:
-    type: "object"
-    required:
-    - "name"
-    - "price"
-    - "product_category_id"
-    properties:
-      id:
-        type: "number"
-        format: "int64"
-        example: 19554785
-      name:
-        type: "string"
-        example: "Apple"
-      price:
-        type: "number"
-        format: "bigdecimal"
-        example: 12.99
-      description:
-        type: "string"
-        example: "This is a very large red clinged apple"
-      product_category_id:
-        type: "number"
-        format: "int64"
-        example: 12
-    example:
-      price: 12.99
-      name: "Apple"
-      description: "This is a very large red clinged apple"
-      id: 19554785
-      product_category_id: 12
-  ProductCategory:
-    type: "object"
-    required:
-    - "name"
-    properties:
-      id:
-        type: "number"
-        format: "int64"
-        example: 12
-      name:
-        type: "string"
-        example: "Fruits"
-      description:
-        type: "string"
-        example: "Products that you can eat and get vitamins"
-    example:
-      name: "Fruits"
-      description: "Products that you can eat and get vitamins"
-      id: 12
-  Invoice:
-    type: object
-    required:
-    - balance
-    - subscription_id
-    - bill_cycle_run_id
-    properties:
-      id:
-        type: "number"
-        format: "int64"
-        example: 12
-      balance:
-        type: number
-        format: "bigdecimal"
-        example: 12.99
-      subscription_id:
-        type: "number"
-        format: "int64"
-        example: 12
-      bill_cycle_run_id:
-        type: "number"
-        format: "int64"
-        example: 12
-  Subscription:
-    type: object
-    required:
-    - status
-    - valid_from
-    - valid_to
-    - product_id
-    - billcycle_id
-    properties:
-      id:
-        type: "number"
-        format: "int64"
-        example: 12
-      status:
-        type: string
-        enum: &SUBSCRIPTION_STATUSES [DRAFT, ACTIVE, EXPIRED]
-      valid_from:
-        type: string
-        format: date
-      valid_to:
-        type: string
-        format: date      
-      product_id:
-        type: "number"
-        format: "int64"
-        example: 12
-      bill_cycle_id:
-        type: "number"
-        format: "int64"
-        example: 12
-  BillCycle:
-    type: object
-    required:
-    - status
-    - valid_from
-    - valid_to
-    properties:
-      id:
-        type: "number"
-        format: "int64"
-        example: 12
-      status:
-        type: string
-        enum: &BILL_CYCLE_STATUSES [DRAFT, ACTIVE, COMPLITED]
-      valid_from:
-        type: string
-        format: date
-      valid_to:
-        type: string
-        format: date
-  BillCycleRun:
-    type: object
-    required:
-    - status
-    - valid_from
-    - valid_to
-    - bill_cycle_id
-    properties:
-      id:
-        type: "number"
-        format: "int64"
-        example: 13
-      status:
-        type: string
-        enum: &BILL_CYCLE_RUN_STATUSES [CREATED, ERROR, COMPLETED]
-      start_date:
-        type: string
-        format: date
-      end_date:
-        type: string
-        format: date
-      bill_cycle_id:
-        type: "number"
-        format: "int64"
-        example: 144
