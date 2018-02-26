@@ -767,4 +767,4 @@ definitions:
       bill_cycle_id:
         type: "number"
         format: "int64"
-        example: 12
+        example: 144
