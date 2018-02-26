@@ -27,6 +27,117 @@ tags:
 schemes:
 - "https"
 paths:
+  /subscriptions:
+    get:
+      tags:
+      - subscription_api
+      summary: "Get all Subscriptions"
+      description: "the server return all Subscriptions.\n"
+      operationId: "getSubscriptions"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Subscriptions in array"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Subscription"
+    post:
+      tags:
+      - subscription_api
+      summary: "Add new Subscription"
+      description: "Create and save given Subscription\n"
+      operationId: "saveSubscription"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "subscription"
+        description: "Provide valid Subscription"
+        required: true
+        schema:
+          $ref: "#/definitions/Subscription"
+      responses:
+        201:
+          description: "the Subscription was successfully created"
+        400:
+          description: "the Subscription was not valid"
+  /subscriptions/{subscription_id}:
+    get:
+      tags:
+      - subscription_api
+      summary: "Get the Subscription by the given id."
+      description: "Return the Subscription by the given id.\n"
+      operationId: "getSubscription"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "subscription_id"
+        in: "path"
+        description: "an id of Subscription"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      responses:
+        200:
+          description: "Requested Subscription"
+          schema:
+            $ref: "#/definitions/Subscription"
+        404:
+          description: "not found any Subscriptions by this id"
+    put:
+      tags:
+      - subscription_api
+      summary: "Update Subscription by id"
+      description: "Update the requested Subscription\n"
+      operationId: "updateSubscription"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "subscription_id"
+        in: "path"
+        description: "an id of Subscription"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      - in: "body"
+        name: "subscription_id"
+        description: "Provide valid Subscription"
+        required: true
+        schema:
+          $ref: "#/definitions/Subscription"
+      responses:
+        204:
+          description: "Successfully updated"
+        400:
+          description: "the Subscription was not valid"
+        404:
+          description: "not found any Subscriptions by this id"
+    delete:
+      tags:
+      - subscription_api
+      summary: "Delete Subscription by id"
+      description: "Delete the requested Subscription\n"
+      operationId: "deleteSubscription"
+      parameters:
+      - name: "subscription_id"
+        in: "path"
+        description: "an id of Subscription"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      responses:
+        204:
+          description: "Successfully deleted"
+        404:
+          description: "not found any Subscriptions by this id"
   /bill_cycle_runs:
     get:
       tags:
@@ -566,6 +677,10 @@ definitions:
     - subscription_id
     - bill_cycle_run_id
     properties:
+      id:
+        type: "number"
+        format: "int64"
+        example: 12
       balance:
         type: number
         format: "bigdecimal"
@@ -587,6 +702,10 @@ definitions:
     - product_id
     - billcycle_id
     properties:
+      id:
+        type: "number"
+        format: "int64"
+        example: 12
       status:
         type: string
         enum: &SUBSCRIPTION_STATUSES [DRAFT, ACTIVE, EXPIRED]
