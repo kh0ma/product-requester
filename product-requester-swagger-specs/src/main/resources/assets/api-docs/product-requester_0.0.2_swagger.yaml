@@ -164,7 +164,7 @@ definitions:
         example: 13
       status:
         type: string
-        enum: &BILL_CYCLE_RUN_STATUSES [CREATED, ERROR, COMPLETED]
+        enum: &BILL_CYCLE_RUN_STATUSES [CREATED, IN_QUEUE, COMPLETED, ERROR]
       start_date:
         type: string
         format: date
@@ -220,6 +220,8 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Invoice"
+        404:
+          description: "not found any Subscriptions by this id"
     post:
       tags:
       - invoice_api
@@ -249,6 +251,8 @@ paths:
           description: "the Invoice was successfully created"
         400:
           description: "the Invoice was not valid"
+        404:
+          description: "not found any Subscriptions by this id"
   /subscriptions/{subscription_id}/invoice/{invoice_id}:
     get:
       tags:
@@ -279,7 +283,7 @@ paths:
           schema:
             $ref: "#/definitions/Invoice"
         404:
-          description: "not found any Invoices by this id"
+          description: "not found any Invoices or Subscription by these ids"
     put:
       tags:
       - invoice_api
@@ -315,7 +319,7 @@ paths:
         400:
           description: "the Invoice was not valid"
         404:
-          description: "not found any Invoice by this id"
+          description: "not found any Invoices or Subscription by these ids"
     delete:
       tags:
       - invoice_api
@@ -341,7 +345,7 @@ paths:
         204:
           description: "Successfully deleted"
         404:
-          description: "not found any Invoices by this id"
+          description: "not found any Invoices or Subscription by these ids"
   /subscriptions:
     get:
       tags:
@@ -516,6 +520,8 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/BillCycleRun"
+        404:
+          description: "not found any BillCycle by this id"
     post:
       tags:
       - bill_cycle_run_api
@@ -545,6 +551,39 @@ paths:
           description: "the Bill Cycle Run was successfully created"
         400:
           description: "the Bill Cycle Run was not valid"
+        404:
+          description: "not found any BillCycle by this id"
+  /bill_cycles/{bill_cycle_id}/bill_cycle_runs/{bill_cycle_run_id}/run:
+    post:
+      tags:
+      - bill_cycle_run_api
+      summary: "Run Bill Cycle Run"
+      description: "Run given Bill Cycle Run\n"
+      operationId: "runBillCycleRun"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "bill_cycle_id"
+        description: "an id of bill cycle"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      - in: "path"
+        name: "bill_cycle_run_id"
+        description: "an id of bill cycle run"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
+      responses:
+        202:
+          description: "the Bill Cycle Run was turned"
+        404:
+          description: "not found any BillCycle or BillCycleRuns by these ids"
   /bill_cycles/{bill_cycle_id}/bill_cycle_runs/{bill_cycle_run_id}:
     get:
       tags:
@@ -575,7 +614,7 @@ paths:
           schema:
             $ref: "#/definitions/BillCycleRun"
         404:
-          description: "not found any Bill Cycle Run by this id"
+          description: "not found any BillCycle or BillCycleRun by these ids"
     put:
       tags:
       - bill_cycle_run_api
@@ -611,7 +650,7 @@ paths:
         400:
           description: "the bill cycle run was not valid"
         404:
-          description: "not found any bill cycle runs by this id"
+          description: "not found any BillCycle or BillCycleRun by these ids"
     delete:
       tags:
       - bill_cycle_run_api
@@ -637,7 +676,7 @@ paths:
         204:
           description: "Successfully deleted"
         404:
-          description: "not found any Bill Cycle Run by this id"
+          description: "not found any BillCycle or BillCycleRun by these ids"
   /bill_cycles:
     get:
       tags:
@@ -979,7 +1018,7 @@ paths:
           schema:
             $ref: "#/definitions/Product"
         404:
-          description: "not found any Product or Product Category by this id's"
+          description: "not found any Product or Product Category by these ids"
     put:
       tags:
       - "products_api"
@@ -1015,7 +1054,7 @@ paths:
         400:
           description: "the Product was not valid"
         404:
-          description: "not found any Product or Product Category by this id's"
+          description: "not found any Product or Product Category by these ids"
     delete:
       tags:
       - "products_api"
@@ -1041,4 +1080,4 @@ paths:
         204:
           description: "Successfully deleted"
         404:
-          description: "not found any Product or Product Category by this id's"
+          description: "not found any Product or Product Category by these ids"
