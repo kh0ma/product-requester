@@ -176,7 +176,7 @@ definitions:
         format: "int64"
         example: 144
 paths:
-  /invoice:
+  /subscriptions/{subscription_id}/invoice:
     get:
       tags:
       - invoice_api
@@ -186,6 +186,13 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: path
+        name: "subscription_id"
+        description: "an id of Subscription"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - in: query
         name: balance_from
         type: number
@@ -224,6 +231,13 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: path
+        name: "subscription_id"
+        description: "an id of Subscription"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - in: "body"
         name: "invoice"
         description: "Provide valid Invoice"
@@ -235,7 +249,7 @@ paths:
           description: "the Invoice was successfully created"
         400:
           description: "the Invoice was not valid"
-  /invoice/{invoice_id}:
+  /subscriptions/{subscription_id}/invoice/{invoice_id}:
     get:
       tags:
       - invoice_api
@@ -245,6 +259,13 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: path
+        name: "subscription_id"
+        description: "an id of Subscription"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - name: "invoice_id"
         in: "path"
         description: "an id of Invoice"
@@ -268,6 +289,13 @@ paths:
       consumes:
       - "application/json"
       parameters:
+      - in: path
+        name: "subscription_id"
+        description: "an id of Subscription"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - name: "invoice_id"
         in: "path"
         description: "an id of Invoice"
@@ -295,6 +323,13 @@ paths:
       description: "Delete the requested Invoice\n"
       operationId: "deleteInvoicen"
       parameters:
+      - in: path
+        name: "subscription_id"
+        description: "an id of Subscription"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - name: "invoice_id"
         in: "path"
         description: "an id of Invoice"
@@ -440,7 +475,7 @@ paths:
           description: "Successfully deleted"
         404:
           description: "not found any Subscriptions by this id"
-  /bill_cycle_runs:
+  /bill_cycles/{bill_cycle_id}/bill_cycle_runs:
     get:
       tags:
       - bill_cycle_run_api
@@ -450,6 +485,13 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "bill_cycle_id"
+        description: "an id of bill cycle"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - in: query
         name: status
         type: string
@@ -485,6 +527,13 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "bill_cycle_id"
+        description: "an id of bill cycle"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - in: "body"
         name: "bill_cycle_run"
         description: "Provide valid Bill Cycle Run"
@@ -496,7 +545,7 @@ paths:
           description: "the Bill Cycle Run was successfully created"
         400:
           description: "the Bill Cycle Run was not valid"
-  /bill_cycle_runs/{bill_cycle_run_id}:
+  /bill_cycles/{bill_cycle_id}/bill_cycle_runs/{bill_cycle_run_id}:
     get:
       tags:
       - bill_cycle_run_api
@@ -506,6 +555,13 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "bill_cycle_id"
+        description: "an id of bill cycle"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - name: "bill_cycle_run_id"
         in: "path"
         description: "an id of bill cycle run"
@@ -529,6 +585,13 @@ paths:
       consumes:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "bill_cycle_id"
+        description: "an id of bill cycle"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - name: "bill_cycle_run_id"
         in: "path"
         description: "an id of bill cycle run"
@@ -556,6 +619,13 @@ paths:
       description: "Delete the requested bill cycle run\n"
       operationId: "deleteBillCycleRun"
       parameters:
+      - in: "path"
+        name: "bill_cycle_id"
+        description: "an id of bill cycle"
+        required: true
+        type: "number"
+        minimum: 1
+        format: "int64"
       - name: "bill_cycle_run_id"
         in: "path"
         description: "an id of bill cycle run"
