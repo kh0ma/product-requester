@@ -1,6 +1,6 @@
-package com.kh0ma.product_requester_api.api;
+package com.kh0ma.product_requester_api.resources;
 
-import com.kh0ma.product_requester_api.dto.BillCycle;
+import com.kh0ma.product_requester_api.dto.BillCycleDto;
 
 import javax.ws.rs.*;
 
@@ -19,27 +19,27 @@ public interface BillCyclesApi {
 
     @GET
     @Produces(APPLICATION_JSON)
-    List<BillCycle> getBillCycles(
+    List<BillCycleDto> getBillCycles(
             @QueryParam("status") String status,
             @QueryParam("valid_from") LocalDate validFrom,
             @QueryParam("valid_to") LocalDate validTo);
 
     @GET
     @Path("/{bill_cycle_id}")
-    BillCycle getBillCycle(
+    BillCycleDto getBillCycle(
             @PathParam("bill_cycle_id") Long billCycleId);
 
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    BillCycle saveBillCycle(
-            BillCycle billCycle);
+    BillCycleDto saveBillCycle(
+            BillCycleDto billCycleDto);
 
     @PUT
     @Path("/{bill_cycle_id}")
     @Consumes(APPLICATION_JSON)
     void updateBillCycle(
             @PathParam("bill_cycle_id") Long billCycleId,
-            BillCycle billCycle);
+            BillCycleDto billCycleDto);
 }
 

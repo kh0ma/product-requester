@@ -5,6 +5,6 @@ package com.kh0ma.product_requester_api;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("Hello from api");
+        System.out.printf("Hello from resources");
     }
 }

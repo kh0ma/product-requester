@@ -5,7 +5,7 @@ import com.google.common.base.MoreObjects;
 
 import java.math.BigDecimal;
 
-public class Invoice {
+public class Invoicedto {
     @JsonProperty("id")
     private Long id;
     @JsonProperty("balance")

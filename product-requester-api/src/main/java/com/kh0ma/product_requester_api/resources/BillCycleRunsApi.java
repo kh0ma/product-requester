@@ -1,6 +1,6 @@
-package com.kh0ma.product_requester_api.api;
+package com.kh0ma.product_requester_api.resources;
 
-import com.kh0ma.product_requester_api.dto.BillCycleRun;
+import com.kh0ma.product_requester_api.dto.BillCycleRunDto;
 
 import javax.ws.rs.*;
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ public interface BillCycleRunsApi {
 
     @GET
     @Produces(APPLICATION_JSON)
-    List<BillCycleRun> getBillCycleRuns(
+    List<BillCycleRunDto> getBillCycleRuns(
             @PathParam("bill_cycle_id") Long billCycleId,
             @QueryParam("status") String status,
             @QueryParam("start_date") LocalDate startDate,
@@ -31,16 +31,16 @@ public interface BillCycleRunsApi {
 
     @GET
     @Path("/{id}")
-    BillCycleRun getBillCycleRun(
+    BillCycleRunDto getBillCycleRun(
             @PathParam("bill_cycle_id") Long billCycleId,
             @PathParam("id") Long id);
 
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    BillCycleRun saveBillCycleRun(
+    BillCycleRunDto saveBillCycleRun(
             @PathParam("bill_cycle_id") Long billCycleId,
-            BillCycleRun billCycle);
+            BillCycleRunDto billCycle);
 
     @PUT
     @Path("/{id}")
@@ -48,5 +48,5 @@ public interface BillCycleRunsApi {
     void updateBillCycleRun(
             @PathParam("bill_cycle_id") Long billCycleId,
             @PathParam("id") Long id,
-            BillCycleRun billCycle);
+            BillCycleRunDto billCycle);
 }

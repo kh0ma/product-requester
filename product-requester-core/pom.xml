@@ -14,5 +14,10 @@
     <version>${revision}</version>
 
     <dependencies>
+        <dependency>
+            <groupId>com.kh0ma</groupId>
+            <artifactId>product-requester-db</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>

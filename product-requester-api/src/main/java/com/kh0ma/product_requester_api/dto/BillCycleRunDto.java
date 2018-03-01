@@ -7,17 +7,15 @@ import com.google.common.base.MoreObjects;
 
 import java.time.LocalDate;
 
-public class Subscription {
+public class BillCycleRunDto {
     @JsonProperty("id")
     private Long id;
     @JsonProperty("status")
     private StatusEnum status;
-    @JsonProperty("valid_from")
-    private LocalDate validFrom;
-    @JsonProperty("valid_to")
-    private LocalDate validTo;
-    @JsonProperty("product_id")
-    private Long productId;
+    @JsonProperty("start_date")
+    private LocalDate startDate;
+    @JsonProperty("end_date")
+    private LocalDate endDate;
     @JsonProperty("bill_cycle_id")
     private Long billCycleId;
 
@@ -37,28 +35,20 @@ public class Subscription {
         this.status = status;
     }
 
-    public LocalDate getValidFrom() {
-        return validFrom;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setValidFrom(LocalDate validFrom) {
-        this.validFrom = validFrom;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDate getValidTo() {
-        return validTo;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setValidTo(LocalDate validTo) {
-        this.validTo = validTo;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public Long getBillCycleId() {
@@ -74,19 +64,20 @@ public class Subscription {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("status", status)
-                .add("validFrom", validFrom)
-                .add("validTo", validTo)
-                .add("productId", productId)
+                .add("startDate", startDate)
+                .add("endDate", endDate)
                 .add("billCycleId", billCycleId)
                 .toString();
     }
 
     public enum StatusEnum {
-        DRAFT("DRAFT"),
+        CREATED("CREATED"),
 
-        ACTIVE("ACTIVE"),
+        IN_QUEUE("IN_QUEUE"),
 
-        EXPIRED("EXPIRED");
+        COMPLETED("COMPLETED"),
+
+        ERROR("ERROR");
 
         private String value;
 

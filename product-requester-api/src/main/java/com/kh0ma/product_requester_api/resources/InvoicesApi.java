@@ -1,6 +1,6 @@
-package com.kh0ma.product_requester_api.api;
+package com.kh0ma.product_requester_api.resources;
 
-import com.kh0ma.product_requester_api.dto.Invoice;
+import com.kh0ma.product_requester_api.dto.Invoicedto;
 
 import javax.ws.rs.*;
 import java.math.BigDecimal;
@@ -23,7 +23,7 @@ public interface InvoicesApi {
 
     @GET
     @Produces(APPLICATION_JSON)
-    List<Invoice> getInvoices(
+    List<Invoicedto> getInvoices(
             @PathParam("subscription_id") Long subscriptionId,
             @QueryParam("balance_from") BigDecimal balanceFrom,
             @QueryParam("balance_to") BigDecimal balanceTo,
@@ -31,16 +31,16 @@ public interface InvoicesApi {
 
     @GET
     @Path("/{id}")
-    Invoice getInvoice(
+    Invoicedto getInvoice(
             @PathParam("subscription_id") Long subscriptionId,
             @PathParam("id") Long Id);
 
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    Invoice saveInvoice(
+    Invoicedto saveInvoice(
             @PathParam("subscription_id") Long subscriptionId,
-            Invoice invoice);
+            Invoicedto invoicedto);
 
     @PUT
     @Path("/{id}")
@@ -48,5 +48,5 @@ public interface InvoicesApi {
     void updateInvoice(
             @PathParam("subscription_id") Long subscriptionId,
             @PathParam("id") Long Id,
-            Invoice invoice);
+            Invoicedto invoicedto);
 }

@@ -18,7 +18,7 @@
         <module>product-requester-core</module>
         <module>product-requester-domain</module>
         <module>product-requester-db</module>
-        <module>product-requester-service</module>
+        <module>product-requester-application</module>
     </modules>
 
     <developers>

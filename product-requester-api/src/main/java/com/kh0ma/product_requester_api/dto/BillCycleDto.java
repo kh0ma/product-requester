@@ -7,17 +7,16 @@ import com.google.common.base.MoreObjects;
 
 import java.time.LocalDate;
 
-public class BillCycleRun {
+
+public class BillCycleDto {
     @JsonProperty("id")
     private Long id;
     @JsonProperty("status")
     private StatusEnum status;
-    @JsonProperty("start_date")
-    private LocalDate startDate;
-    @JsonProperty("end_date")
-    private LocalDate endDate;
-    @JsonProperty("bill_cycle_id")
-    private Long billCycleId;
+    @JsonProperty("valid_from")
+    private LocalDate validFrom;
+    @JsonProperty("valid_to")
+    private LocalDate validTo;
 
     public Long getId() {
         return id;
@@ -35,28 +34,20 @@ public class BillCycleRun {
         this.status = status;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getValidFrom() {
+        return validFrom;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setValidFrom(LocalDate validFrom) {
+        this.validFrom = validFrom;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getValidTo() {
+        return validTo;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public Long getBillCycleId() {
-        return billCycleId;
-    }
-
-    public void setBillCycleId(Long billCycleId) {
-        this.billCycleId = billCycleId;
+    public void setValidTo(LocalDate validTo) {
+        this.validTo = validTo;
     }
 
     @Override
@@ -64,20 +55,17 @@ public class BillCycleRun {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("status", status)
-                .add("startDate", startDate)
-                .add("endDate", endDate)
-                .add("billCycleId", billCycleId)
+                .add("validFrom", validFrom)
+                .add("validTo", validTo)
                 .toString();
     }
 
     public enum StatusEnum {
-        CREATED("CREATED"),
+        DRAFT("DRAFT"),
 
-        IN_QUEUE("IN_QUEUE"),
+        ACTIVE("ACTIVE"),
 
-        COMPLETED("COMPLETED"),
-
-        ERROR("ERROR");
+        COMPLITED("COMPLITED");
 
         private String value;
 
@@ -101,5 +89,6 @@ public class BillCycleRun {
             return String.valueOf(value);
         }
     }
+
 }
 

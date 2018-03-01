@@ -7,8 +7,7 @@ import com.google.common.base.MoreObjects;
 
 import java.time.LocalDate;
 
-
-public class BillCycle {
+public class SubscriptionDto {
     @JsonProperty("id")
     private Long id;
     @JsonProperty("status")
@@ -17,6 +16,10 @@ public class BillCycle {
     private LocalDate validFrom;
     @JsonProperty("valid_to")
     private LocalDate validTo;
+    @JsonProperty("product_id")
+    private Long productId;
+    @JsonProperty("bill_cycle_id")
+    private Long billCycleId;
 
     public Long getId() {
         return id;
@@ -50,6 +53,22 @@ public class BillCycle {
         this.validTo = validTo;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getBillCycleId() {
+        return billCycleId;
+    }
+
+    public void setBillCycleId(Long billCycleId) {
+        this.billCycleId = billCycleId;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -57,6 +76,8 @@ public class BillCycle {
                 .add("status", status)
                 .add("validFrom", validFrom)
                 .add("validTo", validTo)
+                .add("productId", productId)
+                .add("billCycleId", billCycleId)
                 .toString();
     }
 
@@ -65,7 +86,7 @@ public class BillCycle {
 
         ACTIVE("ACTIVE"),
 
-        COMPLITED("COMPLITED");
+        EXPIRED("EXPIRED");
 
         private String value;
 
@@ -89,6 +110,5 @@ public class BillCycle {
             return String.valueOf(value);
         }
     }
-
 }
 
