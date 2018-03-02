@@ -19,12 +19,12 @@ logging:
   level: DEBUG
 
   # Logger-specific levels.
-  loggers:
+#  loggers:
 
     # Sets the level for 'com.example.app' to DEBUG.
 #    com.example.app: DEBUG
 
-    org.hibernate.SQL: ALL
+#    org.hibernate.SQL: ALL
 
   appenders:
     - type: console

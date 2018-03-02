@@ -12,7 +12,6 @@
     <artifactId>product-requester-db</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>com.kh0ma</groupId>
             <artifactId>product-requester-domain</artifactId>
@@ -32,7 +31,12 @@
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.1-901-1.jdbc4</version>
+            <version>${postgres.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
         </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
@@ -46,5 +50,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
