@@ -22,7 +22,7 @@
             <column name="name" type="TINYTEXT"/>
             <column name="description" type="TEXT"/>
             <column name="price" type="DECIMAL(10, 2)"/>
-            <column name="product_category_id" type="BIGINT(8)"/>
+            <column name="product_category_id" type="BIGINT"/>
         </createTable>
     </changeSet>
 
