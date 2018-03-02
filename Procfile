@@ -1,1 +1,1 @@
-web:    java $JAVA_OPTS -jar product-requester-application/target/product-requester-application-0.0.1-SNAPSHOT.jar server product-requester.yaml
+web:    java $JAVA_OPTS -jar FAT/product-requester.jar server product-requester.yaml
