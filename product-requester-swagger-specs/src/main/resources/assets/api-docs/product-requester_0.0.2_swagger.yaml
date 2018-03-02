@@ -25,8 +25,8 @@ tags:
 - name: invoice_api
   description: "CRUD for Invoice"
 schemes:
-- "http"
 - "https"
+- "http"
 definitions:
   Product:
     type: "object"
