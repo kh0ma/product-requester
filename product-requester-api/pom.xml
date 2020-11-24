@@ -3,6 +3,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.kh0ma</groupId>
         <artifactId>product-requester</artifactId>
@@ -13,4 +14,11 @@
     <artifactId>product-requester-api</artifactId>
     <version>${revision}</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.kh0ma</groupId>
+            <artifactId>product-requester-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 </project>

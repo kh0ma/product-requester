@@ -15,7 +15,10 @@
     <modules>
         <module>product-requester-api</module>
         <module>product-requester-swagger-specs</module>
-        <module>product-requester-service</module>
+        <module>product-requester-core</module>
+        <module>product-requester-domain</module>
+        <module>product-requester-db</module>
+        <module>product-requester-application</module>
     </modules>
 
     <developers>
@@ -31,6 +34,7 @@
         <joda.version>2.9.9</joda.version>
         <spring.version>4.3.14.RELEASE</spring.version>
         <mysql.version>6.0.6</mysql.version>
+        <postgres.version>9.1-901-1.jdbc4</postgres.version>
         <liquibase.version>3.5.3</liquibase.version>
         <h2.version>1.4.196</h2.version>
     </properties>
@@ -46,6 +50,11 @@
             <artifactId>dropwizard-testing</artifactId>
             <version>${dropwizard.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
         </dependency>
     </dependencies>
 
@@ -85,6 +94,21 @@
                     <excludes>
                         <exclude>**/*LiveTest.java</exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}</directory>
+                            <includes>
+                                <include>**/FAT/**</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
         </plugins>

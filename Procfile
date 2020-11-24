@@ -1,0 +1,1 @@
+web:    java $JAVA_OPTS -Ddw.server.connector.port=$PORT -jar FAT/product-requester.jar server product-requester.yaml

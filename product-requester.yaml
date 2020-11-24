@@ -1,0 +1,30 @@
+#server:
+#  applicationConnectors:
+#  - type: http
+#    port: 80
+#  adminConnectors:
+#  - type: http
+#    port: 81
+server:
+  type: simple
+  applicationContextPath: /
+  #adminContextPath: /admin # If you plan to use an admin path, you'll need to also use non-root app path
+  connector:
+    type: http
+    port: 8080
+
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: DEBUG
+
+  # Logger-specific levels.
+#  loggers:
+
+    # Sets the level for 'com.example.app' to DEBUG.
+#    com.example.app: DEBUG
+
+#    org.hibernate.SQL: ALL
+
+  appenders:
+    - type: console

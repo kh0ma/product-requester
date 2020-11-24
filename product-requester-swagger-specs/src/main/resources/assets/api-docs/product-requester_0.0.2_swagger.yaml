@@ -9,8 +9,8 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "virtserver.swaggerhub.com"
-basePath: "/kh0ma/product-requester/0.0.2"
+host: ""
+basePath: ""
 tags:
 - name: "product_categories_api"
   description: "CRUD for Product Categories"
@@ -26,6 +26,7 @@ tags:
   description: "CRUD for Invoice"
 schemes:
 - "https"
+- "http"
 definitions:
   Product:
     type: "object"
